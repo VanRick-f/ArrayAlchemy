@@ -14,9 +14,9 @@ a10 = np.random.randint(0,10,(3,3)) #随机创建一个3x3数组，满足0-10
 a11 = np.eye(3)  # 三阶单位矩阵
 
 np.random.seed(0) # 设置种子值：0
-x1 = np.random.randint(10,size = 6)        #随机生成6位一维数组
-x2 = np.random.randint(10,size = (3,4))    #随机创建3x4二维数组
-x3 = np.random.randint(10,size = (3,4,5))  # 理解是：坐标轴（z,x,y）
+# x1 = np.random.randint(10,size = 6)        #随机生成6位一维数组
+# x2 = np.random.randint(10,size = (3,4))    #随机创建3x4二维数组
+# x3 = np.random.randint(10,size = (3,4,5))  # 理解是：坐标轴（z,x,y）
 # print(x2[0,1])     # 可以使用x2[0,1] 也可以用x2[0][1]
 
 # print(a1[0:5:1])   # 和python列表一样[start:stop:step]
@@ -74,4 +74,68 @@ x3 = np.random.randint(10,size = (3,4,5))  # 理解是：坐标轴（z,x,y）
 # s1,s2 = np.dsplit(x3,[1])      #按列切
 
 
-
+'''
+np.empty 是 NumPy 库中用于创建未初始化数组的函数
+它的核心特点是快速分配内存但不初始化数组元素的值。
+因此返回的数组可能包含内存中的随机残留值（“垃圾值”）
+下列操作位基础计算数组倒数
+'''
+# def compute (values):
+#     output = np.empty(len(values))
+#     for i in range(len(values)):
+#         output[i] = 1.0/values[i]
+#     return output
+# values = np.random.randint(1,10,5)
+# result = compute(values)
+#
+# x = np.arange(9)/np.arange(1,10)   # 一维数组相除，相应元素相除
+# x = np.arange(9).reshape(3,3)
+# print(2**x)     ## 对每个元素进行2**x运算
+# x = np.arange(1,10)
+# print("x+5：",x+5)
+# print("x-5：",x-5)
+# print("x*2：",x*2)
+# print("x/2：",x/2)
+# print("x//2：",x//2)    #向下整除运算
+# print("-x",-x)
+# print("x%2",x%2)
+# print("x**2",x**2)
+# print(abs(x))  #numpy 原始函数名位absolute,可以用来处理复数，返回的是复数的模
+# '''三角函数运算'''
+# theta = np.linspace(0,np.pi,3)
+# print(np.sin(theta))
+# print(np.cos(theta))
+# print(np.tan(theta))
+# print("e^x",np.exp(x))
+# print("2^x:",np.exp2(x))
+# print("3^x:",np.power(x,3))
+# print("ln(x):", np.log(x))
+# print("log2(x):", np.log2(x))
+# print("log10(x):", np.log10(x))
+# print("exp(x)-1:",np.expm1(x))
+# print("ln(1+x):", np.log1p(x))
+# from scipy import special as sp
+# x = np.array([1,5,10])
+# print("gamma(x)",sp.gamma(x)) #gamma函数
+# print("ln|gamma(x)|:",sp.gammaln(x))
+# print("beta(x)",sp.beta(x,2)) # 计算输入值x与固定参数2的 Beta 函数值 B(x,2)
+# x = np.array([0,0.3,0.7,1.0])
+# print("erf(x)",sp.erf(x))  # erf(x)（误差函数）
+# print("erfc(x)",sp.erfc(x)) # erfc(x)（互补误差函数）
+# print("erfinv(x)",sp.erfinv(x)) #erfinv(x)（逆误差函数）
+# x = np.arange(5)
+# y = np.empty(5)
+# np.multiply(x, 10,out=y)
+# x = np.arange(5)
+# y = np.zeros(5)
+# np.power(2,x,out = y[::2])
+# print(y)
+# x = np.arange(1,6)
+# print(np.add.reduce(x))  #聚合函数，内部相加
+# print(np.multiply.reduce(x))  #聚合函数，把运算结果相乘
+# print(np.add.accumulate(x))   #聚合函数，内部相加，保留每一次结果
+# print(np.multiply.accumulate(x))   #聚合函数，内部相乘，保留每一次结果
+# x = np.arange(1,6)
+# print(np.add.outer(x,x)) # 加
+# print(np.multiply.outer(x,x)) #乘
+# print(np.divide.outer(x,x))  #除
