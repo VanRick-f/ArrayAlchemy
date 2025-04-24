@@ -166,3 +166,21 @@ np.empty 是 NumPy 库中用于创建未初始化数组的函数
 # plt.xlabel("height(cm)")
 # plt.ylabel("number")
 # plt.show()
+
+# x = np.ones((1,3))
+# y = np.arange(6).reshape(2,3)
+# print(x+y)
+# '''归一化操作'''
+# x = np.random.random((3,3))
+# x_mean = x.mean(axis=0)
+# print(x_mean)
+# x_centered = x - x_mean
+# print(x_centered.mean(0))
+# import matplotlib.pyplot as plt
+# x = np.linspace(0,5,50)
+# y = np.linspace(0,5,50)[:,np.newaxis]
+# z = np.sin(x) **10 +np.cos(10 + y * x) *np.cos(x)  #最终运算的结果z是50x50
+# '''我们用可视化工具展示'''
+# plt.imshow(z,origin='lower',extent=[0,50,0,50],cmap='viridis')
+# plt.colorbar()
+# plt.show()
