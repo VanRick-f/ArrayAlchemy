@@ -139,3 +139,30 @@ np.empty 是 NumPy 库中用于创建未初始化数组的函数
 # print(np.add.outer(x,x)) # 加
 # print(np.multiply.outer(x,x)) #乘
 # print(np.divide.outer(x,x))  #除
+# x = np.random.random((100))
+# print(np.sum(x),np.min(x),np.max(x)) # 输出数组和、最小值、最大值,且np的sum方法指导数组维度
+# print(x.sum(),x.min(),x.max()) # 这种方式更快，x是nparray类型，所以调用的是np的方法
+# x = np.random.randint(1,10,(3,4))
+# print(x.sum(0))
+# print(x.any())
+# print(x.all())
+# '''引入pandas操作文件，后续章节会讲到'''
+# import pandas as pd
+# data = pd.read_csv("president_heights.csv")  #读取csv数据
+# heights = np.array(data['height(cm)'])      # 创建数组，为身高列
+# print("mean height:",heights.mean())        #平均值
+# print("min height:",heights.min())           #最小值
+# print("max height:",heights.max())            #最大值
+# print("standard deviation:",heights.std())        #标准差
+# print("25th percentile:",np.percentile(heights,25))   #25分位
+# print("75th percentile:",np.percentile(heights,75))   #75分位
+# print("median:",np.median(heights))                      #中位数
+# '''生成树状图，后续章节会讲到'''
+# import matplotlib.pyplot as plt
+# import seaborn
+# seaborn.set()
+# plt.hist(heights)
+# plt.title("height distribution of US presidents")
+# plt.xlabel("height(cm)")
+# plt.ylabel("number")
+# plt.show()
