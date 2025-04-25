@@ -184,3 +184,18 @@ np.empty 是 NumPy 库中用于创建未初始化数组的函数
 # plt.imshow(z,origin='lower',extent=[0,50,0,50],cmap='viridis')
 # plt.colorbar()
 # plt.show()
+# x = np.random.randint(1,10,size = (3,4))
+# print(x)
+# print(np.count_nonzero(x))
+# print(np.sum(x<6,0))  #同样可以按轴进行
+# print(np.any(x<6))  # 查看是否有，同样可以按轴进行
+# print(np.all(x<10))  # 查看是否全部，同样可以按轴进行
+# print(np.sum( (x<9) & (x>3) ))  # 逻辑运算符 （&和）、（|或）、（~相当于！）、（^异或）
+# x = np.random.randint(0,12,(3,4))
+# print(x[x<5])  #直接将结果返回一个数组
+# temp1 = (x<5) #为x<5创建一个掩码
+# temp2 = ( (x<10) & (x>1) )
+# print(x[temp1])
+# print(x[temp2])
+
+
