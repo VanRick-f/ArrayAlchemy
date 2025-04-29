@@ -1,5 +1,5 @@
 import numpy as np
-
+import read
 
 a1 = np.array([1,5,3,7,9])                #创建数组,数据类型相同
 a2 = np.array([1.5,5,3,7,9])              #若数据类型不同，则会向上转型，此时转为浮点型
@@ -198,4 +198,65 @@ np.empty 是 NumPy 库中用于创建未初始化数组的函数
 # print(x[temp1])
 # print(x[temp2])
 
+# x = np.random.randint(100,size = 10)
+# print(x)
+# print(x[3],x[7],x[2])  # 传统索引方式
+# ind  = [3,7,2]
+# print(x[ind])
+# ind = np.array([[3,7],[4,5]])
+# print(x[ind])   # 结果与索引形状一样，与原数组无关，但索引值必须合法
+# x = np.arange(12).reshape(3,4)
+# print(x)
+# row = np.array([0,1,2])
+# col = np.array([2,1,3])
+# print(x[row,col])    # row:行坐标  col:列坐标
+# '''广播机制，row:（3x1) ,col:(0x3)  广播为（3x3） 相应位置对应坐标，返回的也是广播后的形状，与原数组无关'''
+# print(x[row[:,np.newaxis],col ])
+# x = np.arange(12).reshape(3,4)
+# print(x)
+# print(x[2,[2,0,1]])  # 花哨索引和普通索引结合，原理还是广播机制
+# print(x[1:,[2,0,1]]) # 与切片结合
+# mask = np.array([1,0,1,0],dtype=bool)
+# row = np.array([0,1,2])
+# print(x[row[:,np.newaxis],mask])  # 同样是广播机制进行匹配
 
+# import matplotlib.pyplot as plt
+# import seaborn
+# seaborn.set()
+# mean = [0,0]
+# cov = [[1,2],[2,5]]
+# x = np.random.multivariate_normal(mean,cov,100) # 二维正态分布  （0，0,1,5，（相关系数ρ）） 2：协方差 = cov（r1r2ρ）相当于根号1根号5ρ
+# plt.scatter(x[:,0],x[:,1])
+# indices = np.random.choice(x.shape[0],20,replace=False)
+# selection = x[indices]
+# print(selection)  # 被随机选中的20个数据，对应横纵坐标
+# plt.scatter(x[:,0],x[:,1],alpha=0.3)
+# plt.scatter(selection[:,0],selection[:,1],facecolors='none',edgecolors='b',s = 200)
+# plt.show()
+
+# x = np.arange(10)
+# i = np.array([2,1,8,4])
+# x[i] = 99   # 使用花哨的索引直接修改数组的值，索引需合法
+# print(x)
+# x[i]-=10  # 逻辑同上，可以进行任意操作，只要索引合法
+# print(x)
+# x = np.zeros(10)
+# x[[0,0]] = [4,6]  # 不可以对同一个位置同一次操作修改
+# print(x)
+# i = [2,3,3,4,4,4]
+# x[i]+=1    # 这里是相同的，同一个位置只能在第一次修改，后续的修改无效
+# print(x)
+# np.add.at(x,i,1)  # 这就可以在同一次逻辑中进行累次操作的,x在i的索引上加一
+# print(x)
+# np.multiply.at(x,i,2) # 逻辑同上，运算为乘法
+# print(x)
+
+# import matplotlib.pyplot as plt
+# x = np.random.randn(100)
+# bins = np.linspace(-5,5,20)
+# counts = np.zeros_like(bins)  # 创建一个数组，全零，与bins数组形状类型一致
+# i = np.searchsorted(bins, x) # 插入算法，在已排序的bins中寻找插入的位置，使结果依旧有序，对每个x单个处理，前面插入的不会影响后面插入的
+# np.add.at(counts, i, 1)  #counts与bins形状一致，为计数器，该函数计算每个区间的点数
+# plt.step(bins, counts)
+# plt.hist(x,bins,histtype='step')  # 这个直接算出x在bins的分布图
+# plt.show()
