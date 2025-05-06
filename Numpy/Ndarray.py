@@ -1,5 +1,6 @@
 import numpy as np
 import read
+from numpy.random import rand
 
 a1 = np.array([1,5,3,7,9])                #创建数组,数据类型相同
 a2 = np.array([1.5,5,3,7,9])              #若数据类型不同，则会向上转型，此时转为浮点型
@@ -260,3 +261,28 @@ np.empty 是 NumPy 库中用于创建未初始化数组的函数
 # plt.step(bins, counts)
 # plt.hist(x,bins,histtype='step')  # 这个直接算出x在bins的分布图
 # plt.show()
+# def select (x):
+#     for i in range(len(x)):
+#         swap = i+np.argmin(x[i:])  # 此时x[i:] 是对于i的相对索引
+#         (x[i], x[swap]) = (x[swap], x[i])
+#     return x
+# x = np.array([2,1,4,3,5])
+# print(select(x))
+
+# x = np.array([2,3,1,4,10,19,3,4,1,9,5])
+# x1 = np.sort(x)   #快速排序
+# x2 = np.argsort(x)  # 返回的是原数组经过排序后的索引
+# x = np.random.randint(0,10,(4,6))
+# print(np.sort(x,0))  #按列排序
+# print(np.sort(x,1))  #按行排序
+# x = np.array([7,2,3,1,6,5,4])
+# x1 = np.partition(x,3)  # 前三个小的在左边，同样可以按轴排序
+# import matplotlib.pyplot as plt
+# import seaborn as sns
+# sns.set()
+# x = np.random.rand(10,2)
+# plt.scatter(x[:,0],x[:,1],s = 100)
+# plt.show()
+# dist_sq = np.sum((x[:,np.newaxis,:] - x[np.newaxis,:,:])**2,2)  ## 使用广播机制，计算所有店之间的距离,按列求和，符合公式
+# rsult = np.argsort(dist_sq,axis=1) #按行下标排序，则得到每个点，邻接矩阵，第一列为升序因为，对角线为0，故对角线元素都是最小的
+# #同样可以在排序时，只展示最小的k个元素
