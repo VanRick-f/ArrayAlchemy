@@ -286,3 +286,23 @@ np.empty 是 NumPy 库中用于创建未初始化数组的函数
 # dist_sq = np.sum((x[:,np.newaxis,:] - x[np.newaxis,:,:])**2,2)  ## 使用广播机制，计算所有店之间的距离,按列求和，符合公式
 # rsult = np.argsort(dist_sq,axis=1) #按行下标排序，则得到每个点，邻接矩阵，第一列为升序因为，对角线为0，故对角线元素都是最小的
 # #同样可以在排序时，只展示最小的k个元素
+
+# name = ['alice','bob','cathy','doug']
+# age = [25,45,37,19]
+# weight = [55,85.5,68,61.5]
+# data = np.zeros(4,dtype={'names':('name','age','weight'),'formats':('U10','i4','f8')})  #长度不超过10Unicode、4int，8float
+# data['name'] = name
+# data['age'] = age
+# data['weight'] = weight
+# print(data['name'])  #可根据索引获取值
+# print(data[0])
+# print(data['name'][-2])  #符合检索，获取倒数第二行的名字
+# print(data[data['age']<30 ]['name'])  #符合检索，获取年龄小于30的姓名
+#
+# tp = np.dtype([('id','i8'),('mat','f8',(3,3))]) #自定义数据类型
+# x = np.zeros(1,dtype=tp)  #数据类型为tp
+# print(x)
+# print(x['mat'][0])
+#
+# data_rec = data.view(np.recarray)  #结构化数组
+# print(data_rec.age)                 #这时被结构化的数组就可以像属性一样获取数据
