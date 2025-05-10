@@ -63,3 +63,44 @@ import numpy as np
 # print(ind1 & ind2 )  #按位与
 # print(ind1 |ind2)    #按位或
 # print(ind1 ^ ind2)               #按位异或
+
+# data = pd.Series([0.25,0.5,0.75,1.0],index=['a','b','c','d'])
+# print('a' in data) #可判断索引存在
+# print(data.keys()) #查看索引
+# print(list(data.items())) #输出对应关系
+# data['e'] = 1.25  #可以根据索引修改，不存在则添加
+'''使用显示索引包含尾部，隐式索引不包含尾部'''
+# print(data['a':'c'])  #切片
+# print(data[0:2])  #隐式切片
+# print(data[data>0.3]) #掩码
+# print(data[['a','e']])
+# '''索引器'''
+# data = pd.Series(['a','b','c'],index=[1,3,5])
+# '''使用索引器选择显示还是隐式'''
+# print(data[1]) #取值操作位隐式索引
+# print(data[1:3]) #切片操作为隐式索引
+# '''loc都是显示'''
+# print(data.loc[1])
+# print(data.loc[1:3])
+# ''' iloc都是隐式的 '''
+# print(data.iloc[1])
+# print(data.iloc[1:3])
+# area_dict = {'california':423967,'texas':695662,'new york':141297,'florida':170312,'illinois':149995}
+# area = pd.Series(area_dict)
+# population_dict = {'california':123456,'texas':1234123,'new york':4432156,'florida':2432542,'illinois':3653252}
+# pop = pd.Series(population_dict)
+# data = pd.DataFrame({'area':area,'popu':pop})  #必须要对每一列数据series结构化才可以
+# '''列名必须是字符串&&列名不能与内置方法同名'''
+# print(data.area)  #列名可以当属性使用
+# print(data.popu)
+# print(data.area is data['area'])  #二者相同
+# data.iloc[0,1] = 123456  #使用隐式索引修改某单个值
+# data['density'] = data['popu']/data['area']  #增加列
+# print(data.values) #科学计数法
+# print(data.T)  #转置
+# print(data.values[0])
+# '''使用切片时可以不用索引器，为代码规范一般使用'''
+# print(data.iloc[:3,:2]) #规则同切片
+# print(data.loc[:'new york',:'popu']) #显示获取
+# print(data.loc[data.density>10,:])  #可以使用混合模式
+# print(data.loc[data.density>10,['popu','density']])  #可以选择列
