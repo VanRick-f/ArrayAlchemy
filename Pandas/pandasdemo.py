@@ -104,3 +104,82 @@ import numpy as np
 # print(data.loc[:'new york',:'popu']) #显示获取
 # print(data.loc[data.density>10,:])  #可以使用混合模式
 # print(data.loc[data.density>10,['popu','density']])  #可以选择列
+
+# np.random.seed(0)
+# ser = pd.Series(np.random.randint(0,10,4))
+# print(ser)
+# df = pd.DataFrame(np.random.randint(0,10,(3,4)),columns=['A','B','C','D'])
+# print(df)
+# print(np.exp(ser))  #指数函数
+# print(np.sin(df*np.pi /4)) #三角函数，通用函数与numpy中相同
+
+# area_dict = {'california':423967,'texas':695662,'new york':141297}
+# area = pd.Series(area_dict)
+# population_dict = {'california':123456,'texas':1234123,'illinois':3653252}
+# pop = pd.Series(population_dict)
+# data = pd.DataFrame({'area':area,'popu':pop})  #必须要对每一列数据series结构化才可以
+# print(data.popu / data.area)  #根据索引对齐，没对齐的部分NaN，结果是并集
+#
+# A = pd.Series([2,4,6],index = [0,1,2])
+# B = pd.Series([1,3,5],index = [1,2,3])
+# print(A + B)  # 会根据索引对齐
+# print(A.add(B,fill_value=0))  #可以设置参数自定义缺失的值
+#
+# np.random.seed(0)
+# A = pd.DataFrame(np.random.randint(0,20,(2,2)),columns=list('AB'))
+# B = pd.DataFrame(np.random.randint(0,10,(3,3)),columns=list('ABC'))
+# fill = A.stack().mean()  #stack作用是降维,降维后求均值
+# print(A.add(B,fill_value=fill))
+
+# np.random.seed(0)
+# '''默认是按行运算'''
+# A = np.random.randint(10,size = (3,4))
+# print(A - A[0])
+# df = pd.DataFrame( A, columns=list('QRST') )
+# print(df)
+# print(df - df.iloc[0])
+# '''自定义轴'''
+# print(df.subtract(df['R'],0)) #按列
+#
+# halfrow =df.iloc[0,::2]
+# print(df-halfrow)  #结果依旧是索引对齐
+
+# vals1 = np.array([1,None,3,4]) #None表示python类型的缺失值
+# # print(vals1.sum())   #如果数据中包含python类型的None，进行求和、平均数时会报错
+# vals2 = np.array([1,np.nan,3,4]) #None表示python类型的缺失值
+# print(vals2.sum())  #nan类型运算操作结果是nan
+# print(np.nansum(vals2))  #忽略缺失值
+# print(np.nanmean(vals2)) #忽略缺失值
+# '''pandas会把None和Nan看做等价的'''
+# vals3 = pd.Series([1,np.nan,3,None])
+# print(vals3.sum())  #pandas对象可以对包含None或Nan对象进行运算
+
+# data = pd.Series([1,np.nan,'hello',None])
+# '''isnull 和notnull 适用于series和dataframe'''
+# print(data.isnull())  #判断是否有缺失值的bool数组
+# print(data[data.notnull()])  #掩码的方式作为索引
+# print(data.dropna())  #series中剔除缺失值
+# df = pd.DataFrame([[1,np.nan,2],
+#                   [2,3,5],
+#                   [np.nan,4,6]])
+# df[3] = np.nan
+# print(df)
+# print(df.dropna())  #默认情况下，会删除包含缺失值的整行
+# print(df.dropna(axis='columns')) #剔除包含缺失值的整列
+# print(df.dropna(axis='columns', how='all')) #按列剔除，如果整列都为缺失值则剔除整列
+# print(df.dropna(axis='columns', how='any')) #按列剔除，只要该列有缺失值则剔除整列
+# print(df.dropna(axis='rows', thresh=3)) #thresh参数指最小非缺失值个数：改行意味最少3个非缺失值
+
+# data = pd.Series([1,np.nan,3,None,4],index = list('abcde'))
+# print(data.fillna(0))  #缺失值填补0
+# print(data.ffill()) #用缺失值前面的值填补
+# print(data.bfill()) #用缺失值前面的值填补
+# '''dataframe用法相同，添加轴参数即可'''
+# df = pd.DataFrame([[1,np.nan,2],
+#                   [2,3,5],
+#                   [np.nan,4,6]])
+# df[3] = np.nan
+# print(df)
+# print(df.fillna(0))
+# print(df.ffill(axis=0)) #按行，向前找
+# print(df.bfill(axis=1)) #按列，向后找
