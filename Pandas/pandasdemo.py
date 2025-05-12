@@ -183,3 +183,103 @@ import numpy as np
 # print(df.fillna(0))
 # print(df.ffill(axis=0)) #按行，向前找
 # print(df.bfill(axis=1)) #按列，向后找
+
+# index = [('california',2000),('california',2010),('new york',2000),('new york',2010),('texas',2000),('texas',2010)]
+# population = [33871648,37253956,18976457,19378102,20851820,25145561]
+# pop = pd.Series(population,index=index)
+# print(pop)
+# print(pop.loc[[i for i in pop.index if i[1]==2010]])  #传统方式选择2010的数据
+# '''多级索引，当索引是个元祖时'''
+# index = pd.MultiIndex.from_tuples(index)  #创建多级索引
+# pop = pop.reindex(index)  #将pop索引设置为多级索引
+# print(pop[:,2010])  #索引1全选，索引2选择2010
+
+# index = [('california',2000),('california',2010),('new york',2000),('new york',2010),('texas',2000),('texas',2010)]
+# population = [33871648,37253956,18976457,19378102,20851820,25145561]
+# pop = pd.Series(population,index=index)
+# index = pd.MultiIndex.from_tuples(index)  #创建多级索引
+# pop = pop.reindex(index)  #将pop索引设置为多级索引
+# # pop_df = pop.unstack()  #将多级索引的series变为dataframe
+# # pop_df = pop_df.stack() #将dataframe转变为多级索引的series
+# pop_df = pd.DataFrame({'total':pop,'under18':[9267089,9284094,4687374,4318033,5906301,6879014]}) #增加一列数据
+# print((pop_df['under18']/pop_df['total']).unstack()) #查找低于18的人口占比，并转换为dataframe单层索引
+#
+# '''创建多级索引 '''
+# df = pd.DataFrame(np.random.rand(4,2)
+#                   ,index = [['a','a','b','b'],[1,2,1,2]] #index参数设置为二维索引
+#                   ,columns=['data1', 'data2'])
+# data = {('california',2000):33871648} #将元祖作为键传给pandas
+# data = pd.Series(data)
+# data = pd.MultiIndex.from_arrays([['a','a','b','b'],[1,2,1,2]])  #根据列表创建
+# data = pd.MultiIndex.from_tuples([('a',1),('a',2),('b',1),('b',2)])  #根据元祖创建
+# data = pd.MultiIndex.from_product([['a','b'],[1,2] ])  #通过笛卡尔积创建
+# pop.index.names = ['state','year']  #为多级索引标签添加name
+# print(pop)
+
+# '''多级列索引'''
+# index = pd.MultiIndex.from_product([[2013,2014],[1,2]],names=['year','visit'])  #笛卡尔积（name是行索引的）
+# columns = pd.MultiIndex.from_product([['bob','guido','sue'],['hr','temp']],names = ['subject','type'])   #笛卡尔积（nams是列索引的）
+# print(index)
+# print(columns)
+# data = np.round(np.random.randn(4,6),1)
+# data[:,::2]*=10
+# data+=37
+# healthy_data = pd.DataFrame(data,index=index,columns=columns)
+# print(healthy_data)
+
+# index = [('california',2000),('california',2010),('new york',2000),('new york',2010),('texas',2000),('texas',2010)]
+# population = [33871648,37253956,18976457,19378102,20851820,25145561]
+# pop = pd.Series(population,index=index)
+# index = pd.MultiIndex.from_tuples(index)  #创建多级索引
+# pop = pop.reindex(index)  #将pop索引设置为多级索引
+# pop.index.names = ['state','population']
+# columns = ['population']
+# print(pop['california',2000]) #获取单值
+# print(pop['california'])  #获取某个层级
+# print(pop.loc['california':'new york'])  #切片
+# print(pop.loc[:,2010]) #切片
+# print(pop[pop>20000000]) #掩码
+# print(pop[['california','texas']]) #此处返回多列数据，要用双括号[[]]
+
+# index = pd.MultiIndex.from_product([[2013,2014],[1,2]],names=['year','visit'])  #笛卡尔积（name是行索引的）
+# columns = pd.MultiIndex.from_product([['bob','guido','sue'],['hr','temp']],names = ['subject','type'])   #笛卡尔积（nams是列索引的）
+# data = np.round(np.random.randn(4,6),1)
+# data[:,::2]*=10
+# data+=37
+# healthy_data = pd.DataFrame(data,index=index,columns=columns)
+# print(healthy_data)
+# print(healthy_data['guido','hr']) #dataframe索引是取列
+# print(healthy_data.iloc[:2,:2])  #切片可以用索引器
+# print(healthy_data.loc[:,('bob','hr')])  #可以传递元祖数据
+# idx = pd.IndexSlice #简化切片
+# print(healthy_data.loc[idx[:,1],idx[:,'hr']])  #第一个表示行索引，第二个是列索引，必须都是多级索引
+
+# index = pd.MultiIndex.from_product([('a','c','b'),(1,2) ])
+# data = pd.Series(np.random.rand(6), index=index)
+# data.index.names = ['char','int']
+# # print(data['a':'c'])  #会报错，因为索引不是按照字母有序的
+# data = data.sort_index() #对索引进行排序之后就可以了
+# print(data['a':'c'])
+
+# index = [('california',2000),('california',2010),('new york',2000),('new york',2010),('texas',2000),('texas',2010)]
+# population = [33871648,37253956,18976457,19378102,20851820,25145561]
+# pop = pd.Series(population,index=index)
+# index = pd.MultiIndex.from_tuples(index)  #创建多级索引
+# pop = pop.reindex(index)  #将pop索引设置为多级索引
+# pop.index.names = ['state','year']
+# print(pop)
+# print(pop.unstack(level=0))  #转换成二维模式，按第0个索引
+# print(pop.unstack(level=1)) #转换成二维模式，按第1个索引
+# pop_flat = pop.reset_index(name = 'population')  #这是大多原始数据的样子,为数据列添加name，将索引还原为普通列
+# print(pop_flat.iloc[0])
+# pop = pop_flat.set_index( ['state','year'])  #为源数据添加多级索引【为要设置成索引的列名】
+
+# index = pd.MultiIndex.from_product([[2013,2014],[1,2]],names=['year','visit'])  #笛卡尔积（name是行索引的）
+# columns = pd.MultiIndex.from_product([['bob','guido','sue'],['hr','temp']],names = ['subject','type'])   #笛卡尔积（nams是列索引的）
+# data = np.round(np.random.randn(4,6),1)
+# data[:,::2]*=10
+# data+=37
+# healthy_data = pd.DataFrame(data,index=index,columns=columns)
+# print(healthy_data)
+# data_mean = healthy_data.groupby(level = 'year').mean()  #使用gropuby后求平均值
+# print(data_mean.T.groupby(level = 'type').mean())  #需要以列求平均值时，先进行转置
