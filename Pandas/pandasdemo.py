@@ -283,3 +283,41 @@ import numpy as np
 # print(healthy_data)
 # data_mean = healthy_data.groupby(level = 'year').mean()  #使用gropuby后求平均值
 # print(data_mean.T.groupby(level = 'type').mean())  #需要以列求平均值时，先进行转置
+
+
+
+# ser1 = pd.Series(['A','B','C'],index = [1,2,3])
+# ser2 = pd.Series(['D','E','F'],index = [4,5,6])
+# print(pd.concat([ser1,ser2],axis=1))  #水品拼接
+# print(pd.concat([ser1,ser2],axis=0))  #垂直拼接
+
+# def make_df(col,ind):
+#     data = {c:[str(c) +str(i) for i in ind] for c in col}
+#     return pd.DataFrame(data)
+# df1 = make_df('AB',[1,2])
+# df2 = make_df('CD',[3,4])
+# print(df1)
+# print(df2)
+# print(pd.concat([df1,df2],axis=0))
+# print(pd.concat([df1,df2],axis=1))
+
+#def make_df(col,ind):
+#     data = {c:[str(c) +str(i) for i in ind] for c in col}
+#     return pd.DataFrame(data)
+# x = make_df('AB',[0,1])
+# y = make_df('AB',[2,3])
+# print(pd.concat([x,y])) #拼接的索引会重复
+# print(pd.concat([x,y],ignore_index=True)) #添加参数忽略索引
+# print(pd.concat([x,y],keys = ['x','y']))  #添加多级索引（包含x0,x1,y0,y1）
+
+# def make_df(col,ind):
+#     data = {c:[str(c) +str(i) for i in ind] for c in col}
+#     return pd.DataFrame(data)
+#
+# df1 = make_df('ABC',[1,2])
+# df2 = make_df('BCD',[3,4])
+# print(df1)
+# print(df2)
+# print(pd.concat([df1,df2],join='inner',axis=0)) #交集合并
+# print(pd.concat([df1,df2],join='outer',axis=0)) #并集合并
+# print(pd.concat([df1,df2],axis=0).reindex(columns= df1.columns)) #合并，合并后的列自定义
