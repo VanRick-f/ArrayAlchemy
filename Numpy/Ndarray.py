@@ -1,5 +1,4 @@
 import numpy as np
-import read
 from numpy.random import rand
 
 a1 = np.array([1,5,3,7,9])                #创建数组,数据类型相同
