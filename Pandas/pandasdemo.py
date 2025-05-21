@@ -321,3 +321,4 @@ print(df2)
 print(pd.concat([df1,df2],join='inner',axis=0)) #交集合并
 print(pd.concat([df1,df2],join='outer',axis=0)) #并集合并
 print(pd.concat([df1,df2],axis=0).reindex(columns= df1.columns)) #合并，合并后的列自定义
+
